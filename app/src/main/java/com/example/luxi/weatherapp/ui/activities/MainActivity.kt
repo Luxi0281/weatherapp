@@ -23,9 +23,9 @@ class MainActivity : AppCompatActivity() {
         forecastList.layoutManager = LinearLayoutManager(this)
 
         doAsync {
-            val result = RequestForecastCommand("344013", "ru").execute()
+            val result = RequestForecastCommand(344013, "ru").execute()
             uiThread {
-                val adapter = ForecastListAdapter(result) { toast(it.date) }
+                val adapter = ForecastListAdapter(result) { toast(it.description) }
                 forecastList.adapter = adapter
                 supportActionBar?.title = "Weather in ${result.city} (${result.country})"
             }

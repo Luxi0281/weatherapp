@@ -1,4 +1,4 @@
-package com.example.luxi.weatherapp.data
+package com.example.luxi.weatherapp.data.server
 
 data class ForecastResult (val city: City, val list: List<Forecast>)
 

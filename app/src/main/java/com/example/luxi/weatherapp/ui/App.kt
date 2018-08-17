@@ -1,12 +1,12 @@
 package com.example.luxi.weatherapp.ui
 
 import android.app.Application
+import com.example.luxi.weatherapp.extensions.DelegatesExt
 
 class App : Application() {
 
     companion object {
-        private var instance: Application? = null
-        fun instance() = instance!!
+        var instance: App by DelegatesExt.notNullSingleValue()
     }
 
     override fun onCreate() {

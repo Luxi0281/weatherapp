@@ -1,4 +1,4 @@
-package com.example.luxi.weatherapp.ui.utilies
+package com.example.luxi.weatherapp.extensions
 
 import android.content.Context
 import android.view.View
