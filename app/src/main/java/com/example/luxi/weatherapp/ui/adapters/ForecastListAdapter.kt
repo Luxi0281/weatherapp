@@ -7,9 +7,8 @@ import android.widget.TextView
 import com.example.luxi.weatherapp.R
 import com.example.luxi.weatherapp.domain.commands.model.Forecast
 import com.example.luxi.weatherapp.domain.commands.model.ForecastList
-import com.example.luxi.weatherapp.utilis.ctx
+import com.example.luxi.weatherapp.ui.utilies.ctx
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.item_forecast.view.*
 import org.jetbrains.anko.find
 
 

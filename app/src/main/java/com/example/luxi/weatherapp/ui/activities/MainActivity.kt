@@ -1,4 +1,4 @@
-package com.example.luxi.weatherapp.activities
+package com.example.luxi.weatherapp.ui.activities
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val forecastList = find<RecyclerView>(R.id.forecast_list)
+        val forecastList = find<RecyclerView>(R.id.forecastList)
         forecastList.layoutManager = LinearLayoutManager(this)
 
         doAsync {
