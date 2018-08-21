@@ -1,15 +1,12 @@
-package com.example.luxi.weatherapp.domain.commands.mappers
-import com.example.luxi.weatherapp.data.server.Forecast
-import com.example.luxi.weatherapp.data.server.ForecastResult
+package com.example.luxi.weatherapp.data.server
 import com.example.luxi.weatherapp.domain.commands.model.ForecastList
-import java.text.DateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
 import com.example.luxi.weatherapp.domain.commands.model.Forecast as ModelForecast
 
-class ForecastDataMapper {
+class ServerDataMapper {
 
-    fun convertFromDataModel(zipCode: Long, forecast: ForecastResult) = with(forecast){
+    fun convertToDomain(zipCode: Long, forecast: ForecastResult) = with(forecast){
         ForecastList(zipCode, city.name, city.country, convertForecastListToDomain(list))
     }
 
@@ -22,7 +19,7 @@ class ForecastDataMapper {
     }
 
     private fun convertForecastItemToDomain(forecast: Forecast) = with(forecast){
-        ModelForecast(dt, weather[0].description, temp.max.toInt(), temp.min.toInt(), generateIconUrl(weather[0].icon))
+        ModelForecast(-1, dt, weather[0].description, temp.max.toInt(), temp.min.toInt(), generateIconUrl(weather[0].icon))
     }
 
     private fun generateIconUrl (iconCode: String): String = "http://openweathermap.org/img/w/$iconCode.png"

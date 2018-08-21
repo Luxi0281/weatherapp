@@ -1,17 +1,21 @@
 package com.example.luxi.weatherapp.data.db
 
+import com.example.luxi.weatherapp.domain.commands.model.Forecast
 import com.example.luxi.weatherapp.domain.commands.model.ForecastList
-import com.example.luxi.weatherapp.extensions.clear
-import com.example.luxi.weatherapp.extensions.parseList
-import com.example.luxi.weatherapp.extensions.parseOpt
-import com.example.luxi.weatherapp.extensions.toVarargArray
+import com.example.luxi.weatherapp.domain.datasource.ForecastDataSource
+import com.example.luxi.weatherapp.extensions.*
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
 
 class ForecastDb(private val forecastDbHelper: ForecastDbHelper = ForecastDbHelper.instance,
-                 private val dataMapper: DbDataMapper = DbDataMapper()) {
+                 private val dataMapper: DbDataMapper = DbDataMapper()) : ForecastDataSource{
+    override fun requestDayForecast(id: Long): Forecast? = forecastDbHelper.use {
+        val forecast = select(DayForecastTable.NAME).byId(id)
+                .parseOpt { DayForecast(HashMap(it)) }
+        if (forecast != null) dataMapper.convertDayToDomain(forecast) else null
+    }
 
-    fun requestForecastByZipCode(zipCode: Long, date: Long) = forecastDbHelper.use {
+    override fun requestForecastByZipCode(zipCode: Long, date: Long) = forecastDbHelper.use {
 
         val dailyRequest = "${DayForecastTable.CITY_ID} = ? AND ${DayForecastTable.DATE} >= ?"
         val dailyForecast = select(DayForecastTable.NAME)
