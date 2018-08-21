@@ -6,6 +6,7 @@ import com.example.luxi.weatherapp.R
 import com.example.luxi.weatherapp.domain.commands.model.Forecast
 import com.example.luxi.weatherapp.domain.commands.model.ForecastList
 import com.example.luxi.weatherapp.extensions.ctx
+import com.example.luxi.weatherapp.extensions.toDateString
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_forecast.view.*
 import java.text.DateFormat
@@ -33,17 +34,12 @@ class ForecastListAdapter(private val weekForecast: ForecastList,
         fun bindForecast(forecast: Forecast) {
             with(forecast) {
                 Picasso.with(itemView.ctx).load(iconUrl).into(itemView.icon)
-                itemView.dateText.text = convertDate(date)
+                itemView.dateText.text = date.toDateString()
                 itemView.descriptionText.text = description
                 itemView.maxTemperature.text = "${high}º"
                 itemView.minTemperature.text = "${low}º"
                 itemView.setOnClickListener { itemClick(this) }
             }
-        }
-
-        private fun convertDate(date: Long): String{
-            val df = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.getDefault())
-            return df.format(date)
         }
     }
 }
